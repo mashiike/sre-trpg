@@ -33,16 +33,16 @@ jobs:
           node-version: 20
           cache: yarn
 
-        - name: Install dependencies
-          run: yarn install --frozen-lockfile
-          if: ${{ steps.tagpr.outputs.tag != '' || github.event_name == 'workflow_dispatch' }}
-        - name: Build website
-          if: ${{ steps.tagpr.outputs.tag != '' || github.event_name == 'workflow_dispatch' }}
-          run: yarn build
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        if: ${{ steps.tagpr.outputs.tag != '' || github.event_name == 'workflow_dispatch' }}
+      - name: Build website
+        if: ${{ steps.tagpr.outputs.tag != '' || github.event_name == 'workflow_dispatch' }}
+        run: yarn build
 
-        - name: Deploy to GitHub Pages
-          uses: peaceiris/actions-gh-pages@v3
-          if: ${{ steps.tagpr.outputs.tag != '' || github.event_name == 'workflow_dispatch' }}
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ steps.tagpr.outputs.tag != '' || github.event_name == 'workflow_dispatch' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

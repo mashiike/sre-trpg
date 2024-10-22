@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
           cache: yarn
-        - name: Install dependencies
+      - name: Install dependencies
           run: yarn install --frozen-lockfile
-        - name: Build website
+      - name: Build website
           run: yarn build
